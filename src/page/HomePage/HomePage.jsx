@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import TextBar from "../../common/component/TextBar/TextBar";
 import SearchButton from "../../common/component/SearchButton/SearchButton";
+import { CircularProgress } from "@mui/material";
 
 export default function HomePage() {
     const [search, setSearch] = useState("");
@@ -54,6 +55,10 @@ export default function HomePage() {
                     }}
                 />
             </Box>
+
+            {loading && <CircularProgress />}
+            {error && <Typography color="error">{error}</Typography>}
+
 
         </Box>
     );
