@@ -127,9 +127,42 @@ export default function HomePage() {
                             </Button>
                         )}
                     </Box>
+
+                    {wordData.meanings.map((meaning, index) => (
+                        <Box
+                            key={index}
+                            sx={{
+                                border: "1px solid #ddd",
+                                borderRadius: 2,
+                                p: 2,
+                                mb: 2,
+                                bgcolor: "#fff",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 1
+                            }}
+                        >
+                            <Typography
+                                variant="subtitle1"
+                                fontWeight="bold"
+                                sx={{ color: "#4a995f" }}
+                            >
+                                {meaning.partOfSpeech}
+                            </Typography>
+                            {meaning.definitions.map((def, i) => (
+                                <Typography
+                                    key={`${index}-${i}`}
+                                    variant="body2"
+                                    sx={{ mb: 0.5 }}
+                                >
+                                    • {def.definition}
+                                    {def.example && ` (e.g. "${def.example}")`}
+                                </Typography>
+                            ))}
+                        </Box>
+                    ))}
                 </Box>
             )}
-
         </Box>
     );
 }
