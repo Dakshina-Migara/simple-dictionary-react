@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, CircularProgress, Button } from "@mui/material";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import TextBar from "../../common/component/TextBar/TextBar";
 import SearchButton from "../../common/component/SearchButton/SearchButton";
-import { CircularProgress } from "@mui/material";
-import { Button } from "@mui/material";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 export default function HomePage() {
     const [search, setSearch] = useState("");
@@ -40,7 +38,6 @@ export default function HomePage() {
         audio.play();
     };
 
-
     return (
         <Box
             sx={{
@@ -60,6 +57,7 @@ export default function HomePage() {
             >
                 Free Dictionary
             </Typography>
+
             <Box
                 sx={{
                     display: "flex",
@@ -72,11 +70,11 @@ export default function HomePage() {
                 <TextBar
                     value={search}
                     setValue={setSearch}
-                    onEnter={() => { }}
+                    onEnter={handleSearch}
                     sx={{ flex: 1 }}
                 />
                 <SearchButton
-                    onClick={() => { }}
+                    onClick={handleSearch}
                     sx={{
                         backgroundColor: "#59AC77",
                         "&:hover": { backgroundColor: "#4a995f" },
