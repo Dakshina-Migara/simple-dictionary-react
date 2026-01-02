@@ -10,6 +10,27 @@ export default function HomePage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    const handleSearch = async () => {
+        if (!search.trim()) return;
+        setLoading(true);
+        setError("");
+        setWordData(null);
+
+        try {
+            const response = await fetch(
+                `https://api.dictionaryapi.dev/api/v2/entries/en_US/${search}`
+            );
+            if (!response.ok) throw new Error("Word not found");
+            const data = await response.json();
+            setWordData(data[0]);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     return (
         <Box
             sx={{
