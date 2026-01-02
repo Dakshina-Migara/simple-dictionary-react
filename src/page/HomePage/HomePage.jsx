@@ -28,6 +28,33 @@ export default function HomePage() {
             >
                 Free Dictionary
             </Typography>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", sm: "row" },
+                    width: "100%",
+                    maxWidth: 500,
+                    gap: 1
+                }}
+            >
+                <TextBar
+                    value={search}
+                    setValue={setSearch}
+                    onEnter={() => { }}
+                    sx={{ flex: 1 }}
+                />
+                <SearchButton
+                    onClick={() => { }}
+                    sx={{
+                        backgroundColor: "#59AC77",
+                        "&:hover": { backgroundColor: "#4a995f" },
+                        height: 55,
+                        px: 3,
+                        mt: { xs: 1, sm: 0 }
+                    }}
+                />
+            </Box>
+
         </Box>
     );
 }
