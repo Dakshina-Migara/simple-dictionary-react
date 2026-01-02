@@ -3,6 +3,8 @@ import { Box, Typography } from "@mui/material";
 import TextBar from "../../common/component/TextBar/TextBar";
 import SearchButton from "../../common/component/SearchButton/SearchButton";
 import { CircularProgress } from "@mui/material";
+import { Button } from "@mui/material";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 export default function HomePage() {
     const [search, setSearch] = useState("");
@@ -28,6 +30,14 @@ export default function HomePage() {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handlePlay = () => {
+        if (!wordData?.phonetics?.length) return;
+        const audioUrl = wordData.phonetics.find(p => p.audio)?.audio;
+        if (!audioUrl) return;
+        const audio = new Audio(audioUrl);
+        audio.play();
     };
 
 
@@ -80,6 +90,45 @@ export default function HomePage() {
             {loading && <CircularProgress />}
             {error && <Typography color="error">{error}</Typography>}
 
+            {wordData && (
+                <Box
+                    sx={{
+                        mt: 3,
+                        p: 2,
+                        width: "100%",
+                        maxWidth: 500,
+                        bgcolor: "#f9f9f9",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 2
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: { xs: "column", sm: "row" },
+                            alignItems: { xs: "flex-start", sm: "center" },
+                            gap: "10px"
+                        }}
+                    >
+                        <Typography variant="h5">{wordData.word}</Typography>
+                        {wordData.phonetics.some(p => p.audio) && (
+                            <Button
+                                onClick={handlePlay}
+                                startIcon={<PlayArrowIcon />}
+                                sx={{
+                                    backgroundColor: "white",
+                                    color: "#59AC77",
+                                    border: "1px solid #59AC77",
+                                    textTransform: "none"
+                                }}
+                            >
+                                Play
+                            </Button>
+                        )}
+                    </Box>
+                </Box>
+            )}
 
         </Box>
     );
